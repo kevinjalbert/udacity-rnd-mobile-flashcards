@@ -8,8 +8,8 @@ import thunkMiddleware from 'redux-thunk';
 import logger from 'redux-logger';
 
 import reducers from './reducers';
-import { AddDeckScreenContainer } from './containers/AddDeckScreenContainer';
-import { DecksScreenContainer } from './containers/DecksScreenContainer';
+import AddDeckScreenContainer from './containers/AddDeckScreenContainer';
+import DecksScreenContainer from './containers/DecksScreenContainer';
 
 /* eslint-disable react/prop-types */
 const Tabs = TabNavigator({

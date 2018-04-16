@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 
 class AddDeckScreenContainer extends Component {
@@ -11,4 +12,8 @@ class AddDeckScreenContainer extends Component {
   }
 }
 
-export { AddDeckScreenContainer };
+function mapStateToProps(_state) {
+  return {};
+}
+
+export default connect(mapStateToProps)(AddDeckScreenContainer);
