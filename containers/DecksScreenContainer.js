@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FontAwesome } from '@expo/vector-icons';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, FlatList, Text, View, TouchableOpacity } from 'react-native';
 
 import { deckOperations } from '../state/deck';
+import DeckRowItem from '../components/DeckRowItem';
 
 class DecksScreenContainer extends Component {
   componentDidMount() {
@@ -23,8 +24,20 @@ class DecksScreenContainer extends Component {
 
   renderDecks = () => (
     <View style={styles.container}>
-      <Text style={styles.text}>Decks</Text>
-      {this.props.decks.map(deck => <Text key={deck.name}>{deck.name}</Text>)}
+      <FlatList
+        style={styles.list}
+        data={this.props.decks}
+        keyExtractor={item => item.name}
+        renderItem={data => <DeckRowItem deck={data.item} />}
+        ItemSeparatorComponent={() => (
+          <View
+            style={{
+              height: 2,
+              backgroundColor: '#CED0CE',
+            }}
+          />
+        )}
+      />
     </View>
   );
 
@@ -59,11 +72,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 20,
   },
-  text: {
-    fontSize: 30,
-    marginTop: 200,
-    marginBottom: 25,
+  list: {
+    height: '100%',
+    width: '100%',
   },
 });
 
