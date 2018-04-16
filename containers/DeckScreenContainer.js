@@ -5,6 +5,10 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 class DeckScreenContainer extends Component {
   render() {
+    if (this.props.deck === undefined || this.props.deck === null) {
+      return null;
+    }
+
     return (
       <View style={styles.container}>
         <View style={styles.deckInfo}>

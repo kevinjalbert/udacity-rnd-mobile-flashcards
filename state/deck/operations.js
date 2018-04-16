@@ -1,9 +1,16 @@
 import * as actions from './actions';
+import { getDecks, saveDeckTitle } from '../../utils/storage';
 
-const loadDecks = actions.loaded;
+const loadDecks = () => dispatch => {
+  getDecks().then(decks => {
+    dispatch(actions.loaded(decks));
+  });
+};
 
 const createNewDeck = name => dispatch => {
-  dispatch(actions.newDeck(name));
+  saveDeckTitle(name).then(() => {
+    dispatch(actions.newDeck(name));
+  });
 };
 
 const selectDeck = name => dispatch => {

@@ -1,7 +1,10 @@
 import * as types from './types';
 
-const loaded = () => ({
+const loaded = decks => ({
   type: types.LOADED,
+  payload: {
+    decks,
+  },
 });
 
 const newDeck = name => ({

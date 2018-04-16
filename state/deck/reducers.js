@@ -16,7 +16,7 @@ import * as types from './types';
 const loadedReducer = (state = {}, { type, payload }) => {
   switch (type) {
     case types.LOADED:
-      return { ...state };
+      return { ...state, ...payload.decks };
     case types.NEW_DECK:
       return { ...state, [payload.name]: { name: payload.name, cards: [] } };
     default:
