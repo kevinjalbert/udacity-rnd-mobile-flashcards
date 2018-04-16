@@ -2,12 +2,9 @@ import React from 'react';
 import { View } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import { FontAwesome } from '@expo/vector-icons';
-import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import thunkMiddleware from 'redux-thunk';
-import logger from 'redux-logger';
 
-import reducers from './reducers';
+import store from './state/store';
 import AddDeckScreenContainer from './containers/AddDeckScreenContainer';
 import DecksScreenContainer from './containers/DecksScreenContainer';
 
@@ -33,9 +30,6 @@ const Tabs = TabNavigator({
   },
 });
 /* eslint-enable react/prop-types */
-
-const middewares = [thunkMiddleware, logger];
-const store = createStore(reducers, compose(applyMiddleware(...middewares)));
 
 export default class App extends React.Component {
   render() {

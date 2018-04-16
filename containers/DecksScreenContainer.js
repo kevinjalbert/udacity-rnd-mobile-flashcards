@@ -4,7 +4,13 @@ import { connect } from 'react-redux';
 import { FontAwesome } from '@expo/vector-icons';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
+import { deckOperations } from '../state/deck';
+
 class DecksScreenContainer extends Component {
+  componentDidMount() {
+    this.props.loadDecks();
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -22,6 +28,7 @@ DecksScreenContainer.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }).isRequired,
+  loadDecks: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -37,10 +44,12 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps(state) {
-  return {
-    decks: state.decks,
-  };
-}
+const mapStateToProps = state => ({
+  decks: state.decks,
+});
 
-export default connect(mapStateToProps)(DecksScreenContainer);
+const mapDispatchToProps = {
+  loadDecks: deckOperations.loadDecks,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DecksScreenContainer);
