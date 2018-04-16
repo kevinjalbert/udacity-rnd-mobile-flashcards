@@ -13,7 +13,7 @@ class AddDeckScreenContainer extends Component {
   pressCreate = () => {
     this.props.createNewDeck(this.state.name);
     this.setState({ name: '' });
-    this.props.navigation.navigate('Decks');
+    this.props.navigation.navigate('Deck');
   };
 
   render() {

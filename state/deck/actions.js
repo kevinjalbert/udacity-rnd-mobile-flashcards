@@ -11,10 +11,10 @@ const newDeck = name => ({
   },
 });
 
-const selected = key => ({
+const selected = name => ({
   type: types.SELECTED,
   payload: {
-    key,
+    name,
   },
 });
 

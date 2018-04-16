@@ -12,8 +12,8 @@ class DecksScreenContainer extends Component {
     this.props.loadDecks();
   }
 
-  pressDeck = key => {
-    this.props.selectDeck(key);
+  pressDeck = name => {
+    this.props.selectDeck(name);
     this.props.navigation.navigate('Deck');
   };
 
@@ -29,7 +29,7 @@ class DecksScreenContainer extends Component {
 
   renderDecks = () => {
     const flatListData = Object.keys(this.props.decks).reduce((data, key) => {
-      data.push({ ...this.props.decks[key], key });
+      data.push({ ...this.props.decks[key] });
       return data;
     }, []);
 
@@ -38,9 +38,9 @@ class DecksScreenContainer extends Component {
         <FlatList
           style={styles.list}
           data={flatListData}
-          keyExtractor={item => item.key}
+          keyExtractor={item => item.name}
           renderItem={data => (
-            <DeckRowItem deck={data.item} viewDeck={() => this.pressDeck(data.item.key)} />
+            <DeckRowItem deck={data.item} viewDeck={() => this.pressDeck(data.item.name)} />
           )}
           ItemSeparatorComponent={() => (
             <View

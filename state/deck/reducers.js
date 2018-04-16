@@ -16,28 +16,7 @@ import * as types from './types';
 const loadedReducer = (state = {}, { type, payload }) => {
   switch (type) {
     case types.LOADED:
-      return {
-        ruby: {
-          name: 'Ruby',
-          cards: [
-            {
-              question: 'Test Question',
-              answer: 'Test Answer',
-            },
-          ],
-          selected: false,
-        },
-        react: {
-          name: 'React',
-          cards: [
-            {
-              question: 'Test Question',
-              answer: 'Test Answer',
-            },
-          ],
-          selected: false,
-        },
-      };
+      return { ...state };
     case types.NEW_DECK:
       return { ...state, [payload.name]: { name: payload.name, cards: [] } };
     default:
@@ -48,7 +27,9 @@ const loadedReducer = (state = {}, { type, payload }) => {
 const selectedReducer = (state = '', { type, payload }) => {
   switch (type) {
     case types.SELECTED:
-      return payload.key;
+      return payload.name;
+    case types.NEW_DECK:
+      return payload.name;
     default:
       return state;
   }
