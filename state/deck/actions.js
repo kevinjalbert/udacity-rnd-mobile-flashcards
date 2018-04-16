@@ -11,4 +11,11 @@ const newDeck = name => ({
   },
 });
 
-export { loaded, newDeck };
+const selected = key => ({
+  type: types.SELECTED,
+  payload: {
+    key,
+  },
+});
+
+export { loaded, newDeck, selected };

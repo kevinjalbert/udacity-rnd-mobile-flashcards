@@ -3,15 +3,17 @@ import * as types from './types';
 
 /* State Shape
 {
-    deckName:
-      name: string
-      cards: array
-        question: string
-        answer: string
+    entries: object
+      deckName: object
+        name: string
+        cards: array
+          question: string
+          answer: string
+    selected: string
 }
 */
 
-const loadedReducer = (state = [], { type, payload }) => {
+const loadedReducer = (state = {}, { type, payload }) => {
   switch (type) {
     case types.LOADED:
       return {
@@ -23,6 +25,7 @@ const loadedReducer = (state = [], { type, payload }) => {
               answer: 'Test Answer',
             },
           ],
+          selected: false,
         },
         react: {
           name: 'React',
@@ -32,6 +35,7 @@ const loadedReducer = (state = [], { type, payload }) => {
               answer: 'Test Answer',
             },
           ],
+          selected: false,
         },
       };
     case types.NEW_DECK:
@@ -41,8 +45,18 @@ const loadedReducer = (state = [], { type, payload }) => {
   }
 };
 
+const selectedReducer = (state = '', { type, payload }) => {
+  switch (type) {
+    case types.SELECTED:
+      return payload.key;
+    default:
+      return state;
+  }
+};
+
 const reducer = combineReducers({
   entries: loadedReducer,
+  selected: selectedReducer,
 });
 
 export default reducer;

@@ -12,6 +12,11 @@ class DecksScreenContainer extends Component {
     this.props.loadDecks();
   }
 
+  pressDeck = key => {
+    this.props.selectDeck(key);
+    this.props.navigation.navigate('Deck');
+  };
+
   renderEmptyDecks = () => (
     <View style={styles.container}>
       <Text style={styles.text}>No Decks</Text>
@@ -34,7 +39,9 @@ class DecksScreenContainer extends Component {
           style={styles.list}
           data={flatListData}
           keyExtractor={item => item.key}
-          renderItem={data => <DeckRowItem deck={data.item} />}
+          renderItem={data => (
+            <DeckRowItem deck={data.item} viewDeck={() => this.pressDeck(data.item.key)} />
+          )}
           ItemSeparatorComponent={() => (
             <View
               style={{
@@ -61,6 +68,7 @@ DecksScreenContainer.propTypes = {
     navigate: PropTypes.func,
   }).isRequired,
   loadDecks: PropTypes.func.isRequired,
+  selectDeck: PropTypes.func.isRequired,
   decks: PropTypes.shape({
     name: PropTypes.string,
     cards: PropTypes.arrayOf(
@@ -91,6 +99,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   loadDecks: deckOperations.loadDecks,
+  selectDeck: deckOperations.selectDeck,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DecksScreenContainer);

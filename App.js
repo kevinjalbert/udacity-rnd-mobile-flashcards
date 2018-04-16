@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, Dimensions } from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 import { FontAwesome } from '@expo/vector-icons';
 import { Provider } from 'react-redux';
 
 import store from './state/store';
 import AddDeckScreenContainer from './containers/AddDeckScreenContainer';
 import DecksScreenContainer from './containers/DecksScreenContainer';
+import DeckScreenContainer from './containers/DeckScreenContainer';
 
 /* eslint-disable no-console */
 console.disableYellowBox = true; // Disable the react 16.3.0 depreciation warnings in app
@@ -31,6 +32,21 @@ const Tabs = TabNavigator({
 });
 /* eslint-enable react/prop-types */
 
+const Navigation = StackNavigator({
+  Root: {
+    screen: Tabs,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  Deck: {
+    screen: DeckScreenContainer,
+    navigationOptions: {
+      headerTitle: 'Deck View',
+    },
+  },
+});
+
 const { width, height } = Dimensions.get('window');
 
 export default class App extends React.Component {
@@ -38,7 +54,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={{ flex: 1, width, height }}>
-          <Tabs />
+          <Navigation />
         </View>
       </Provider>
     );

@@ -6,4 +6,8 @@ const createNewDeck = name => dispatch => {
   dispatch(actions.newDeck(name));
 };
 
-export { loadDecks, createNewDeck };
+const selectDeck = name => dispatch => {
+  dispatch(actions.selected(name));
+};
+
+export { loadDecks, createNewDeck, selectDeck };

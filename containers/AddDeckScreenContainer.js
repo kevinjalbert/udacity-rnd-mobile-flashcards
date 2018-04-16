@@ -29,7 +29,7 @@ class AddDeckScreenContainer extends Component {
           onChangeText={name => this.setState({ name })}
         />
         <TouchableOpacity style={styles.button} onPress={this.pressCreate}>
-          <Text style={{ color: 'white' }}>Create</Text>
+          <Text style={styles.buttonText}>Create</Text>
         </TouchableOpacity>
       </View>
     );
@@ -67,6 +67,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
   },
 });
 
