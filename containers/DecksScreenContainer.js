@@ -22,27 +22,34 @@ class DecksScreenContainer extends Component {
     </View>
   );
 
-  renderDecks = () => (
-    <View style={styles.container}>
-      <FlatList
-        style={styles.list}
-        data={this.props.decks}
-        keyExtractor={item => item.name}
-        renderItem={data => <DeckRowItem deck={data.item} />}
-        ItemSeparatorComponent={() => (
-          <View
-            style={{
-              height: 2,
-              backgroundColor: '#CED0CE',
-            }}
-          />
-        )}
-      />
-    </View>
-  );
+  renderDecks = () => {
+    const flatListData = Object.keys(this.props.decks).reduce((data, key) => {
+      data.push({ ...this.props.decks[key], key });
+      return data;
+    }, []);
+
+    return (
+      <View style={styles.container}>
+        <FlatList
+          style={styles.list}
+          data={flatListData}
+          keyExtractor={item => item.key}
+          renderItem={data => <DeckRowItem deck={data.item} />}
+          ItemSeparatorComponent={() => (
+            <View
+              style={{
+                height: 2,
+                backgroundColor: '#CED0CE',
+              }}
+            />
+          )}
+        />
+      </View>
+    );
+  };
 
   render() {
-    if (this.props.decks.length === 0) {
+    if (Object.keys(this.props.decks).length === 0) {
       return this.renderEmptyDecks();
     }
     return this.renderDecks();
@@ -54,17 +61,15 @@ DecksScreenContainer.propTypes = {
     navigate: PropTypes.func,
   }).isRequired,
   loadDecks: PropTypes.func.isRequired,
-  decks: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      cards: PropTypes.arrayOf(
-        PropTypes.shape({
-          question: PropTypes.string,
-          answer: PropTypes.string,
-        }),
-      ),
-    }),
-  ).isRequired,
+  decks: PropTypes.shape({
+    name: PropTypes.string,
+    cards: PropTypes.arrayOf(
+      PropTypes.shape({
+        question: PropTypes.string,
+        answer: PropTypes.string,
+      }),
+    ),
+  }).isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -81,7 +86,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  decks: state.deck.loaded,
+  decks: state.deck.entries,
 });
 
 const mapDispatchToProps = {
