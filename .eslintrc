@@ -22,6 +22,7 @@
       "always"
     ],
     "no-unused-vars": [2, {"args": "all", "argsIgnorePattern": "^_"}],
+    "no-use-before-define": ["error", { "variables": false }],
     "prettier/prettier": "error"
   }
 }

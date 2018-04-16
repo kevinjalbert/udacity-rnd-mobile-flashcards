@@ -11,6 +11,10 @@ import reducers from './reducers';
 import AddDeckScreenContainer from './containers/AddDeckScreenContainer';
 import DecksScreenContainer from './containers/DecksScreenContainer';
 
+/* eslint-disable no-console */
+console.disableYellowBox = true; // Disable the react 16.3.0 depreciation warnings in app
+/* eslint-enable no-console */
+
 /* eslint-disable react/prop-types */
 const Tabs = TabNavigator({
   Decks: {
