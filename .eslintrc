@@ -1,0 +1,26 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "jsx-a11y/alt-text": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-filename-extension": "off",
+    "react/prefer-stateless-function": 0,
+    "react/prefer-es6-class": [
+      2,
+      "always"
+    ],
+    "prettier/prettier": "error"
+  }
+}
