@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 class DeckRowItem extends Component {
   render() {
     return (
       <TouchableOpacity style={styles.container} onPress={this.props.viewDeck}>
-        <Text style={styles.text}>{this.props.deck.name}</Text>
+        <Text style={styles.name}>{this.props.deck.name}</Text>
+        <Text style={styles.cardsCount}>{this.props.deck.cards.length} cards</Text>
       </TouchableOpacity>
     );
   }
@@ -31,9 +32,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  text: {
+  name: {
     fontSize: 20,
-    padding: 20,
+    margin: 15,
+  },
+  cardsCount: {
+    fontSize: 15,
+    marginTop: -15,
+    paddingBottom: 15,
+    color: '#A9A9A9',
   },
 });
 
