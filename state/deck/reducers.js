@@ -3,14 +3,38 @@ import * as types from './types';
 
 /* State Shape
 {
-    decks: object
+    deck:
+      loaded: array
+        name: string
+        cards: array
+          question: string
+          answer: string
 }
 */
 
-const loadedReducer = (state = {}, { type, _payload }) => {
+const loadedReducer = (state = [], { type, _payload }) => {
   switch (type) {
     case types.LOADED:
-      return true;
+      return [
+        {
+          name: 'Ruby',
+          cards: [
+            {
+              question: 'Test Question',
+              answer: 'Test Answer',
+            },
+          ],
+        },
+        {
+          name: 'React',
+          cards: [
+            {
+              question: 'Test Question',
+              answer: 'Test Answer',
+            },
+          ],
+        },
+      ];
     default:
       return state;
   }
