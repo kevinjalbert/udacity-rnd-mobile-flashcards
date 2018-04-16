@@ -4,4 +4,11 @@ const loaded = () => ({
   type: types.LOADED,
 });
 
-export { loaded };
+const newDeck = name => ({
+  type: types.NEW_DECK,
+  payload: {
+    name,
+  },
+});
+
+export { loaded, newDeck };

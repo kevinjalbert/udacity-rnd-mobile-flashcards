@@ -12,7 +12,9 @@ import * as types from './types';
 }
 */
 
-const loadedReducer = (state = [], { type, _payload }) => {
+const loadedReducer = (state = [], { type, payload }) => {
+  const newState = state.slice(0, state.length);
+
   switch (type) {
     case types.LOADED:
       return [
@@ -35,10 +37,18 @@ const loadedReducer = (state = [], { type, _payload }) => {
           ],
         },
       ];
+    case types.NEW_DECK:
+      newState.push({
+        name: payload.name,
+        cards: [],
+      });
+
+      return newState;
     default:
       return state;
   }
 };
+
 const reducer = combineReducers({
   loaded: loadedReducer,
 });

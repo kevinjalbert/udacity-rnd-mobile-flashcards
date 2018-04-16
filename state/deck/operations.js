@@ -2,4 +2,8 @@ import * as actions from './actions';
 
 const loadDecks = actions.loaded;
 
-export { loadDecks };
+const createNewDeck = name => dispatch => {
+  dispatch(actions.newDeck(name));
+};
+
+export { loadDecks, createNewDeck };
