@@ -17,6 +17,7 @@ class AddCardScreenContainer extends Component {
       answer: this.state.answer,
     });
     this.setState({ question: '', answer: '' });
+    this.props.navigation.goBack();
   };
 
   render() {
@@ -45,6 +46,9 @@ class AddCardScreenContainer extends Component {
 }
 
 AddCardScreenContainer.propTypes = {
+  navigation: PropTypes.shape({
+    goBack: PropTypes.func,
+  }).isRequired,
   createNewCard: PropTypes.func.isRequired,
   deck: PropTypes.shape({
     name: PropTypes.string,
