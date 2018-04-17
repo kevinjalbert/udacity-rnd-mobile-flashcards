@@ -5,6 +5,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Provider } from 'react-redux';
 
 import store from './state/store';
+import AddCardScreenContainer from './containers/AddCardScreenContainer';
 import AddDeckScreenContainer from './containers/AddDeckScreenContainer';
 import DecksScreenContainer from './containers/DecksScreenContainer';
 import DeckScreenContainer from './containers/DeckScreenContainer';
@@ -43,6 +44,12 @@ const Navigation = StackNavigator({
     screen: DeckScreenContainer,
     navigationOptions: {
       headerTitle: 'Deck View',
+    },
+  },
+  AddCard: {
+    screen: AddCardScreenContainer,
+    navigationOptions: {
+      headerTitle: 'Add Card',
     },
   },
 });

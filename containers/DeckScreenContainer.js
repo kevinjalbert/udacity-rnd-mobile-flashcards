@@ -17,7 +17,10 @@ class DeckScreenContainer extends Component {
         </View>
 
         <View style={styles.buttons}>
-          <TouchableOpacity style={styles.addCardButton} onPress={this.addCard}>
+          <TouchableOpacity
+            style={styles.addCardButton}
+            onPress={() => this.props.navigation.navigate('AddCard')}
+          >
             <Text style={styles.addCardText}>Add Card</Text>
           </TouchableOpacity>
 
@@ -31,6 +34,9 @@ class DeckScreenContainer extends Component {
 }
 
 DeckScreenContainer.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
   deck: PropTypes.shape({
     name: PropTypes.string,
     cards: PropTypes.arrayOf(

@@ -21,4 +21,12 @@ const selected = name => ({
   },
 });
 
-export { loaded, newDeck, selected };
+const newCard = (deckName, card) => ({
+  type: types.NEW_CARD,
+  payload: {
+    deckName,
+    card,
+  },
+});
+
+export { loaded, newDeck, selected, newCard };

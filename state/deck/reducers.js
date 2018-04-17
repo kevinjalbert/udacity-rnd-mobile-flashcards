@@ -19,6 +19,10 @@ const loadedReducer = (state = {}, { type, payload }) => {
       return { ...state, ...payload.decks };
     case types.NEW_DECK:
       return { ...state, [payload.name]: { name: payload.name, cards: [] } };
+    case types.NEW_CARD:
+      const newState = { ...state };
+      newState[payload.deckName].cards.push(payload.card);
+      return newState;
     default:
       return state;
   }

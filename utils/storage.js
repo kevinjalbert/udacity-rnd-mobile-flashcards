@@ -17,3 +17,18 @@ export function getDecks() {
 export function saveDeckTitle(name) {
   return AsyncStorage.setItem(name, JSON.stringify({ name, cards: [] }));
 }
+
+export function addCardToDeck(deckName, card) {
+  return AsyncStorage.getItem(deckName).then(result => {
+    const { cards } = JSON.parse(result);
+    cards.push(card);
+
+    AsyncStorage.mergeItem(
+      deckName,
+      JSON.stringify({
+        cards,
+      }),
+    );
+    return card;
+  });
+}
