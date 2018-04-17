@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FontAwesome } from '@expo/vector-icons';
-import { StyleSheet, FlatList, Text, View, TouchableOpacity } from 'react-native';
+import { List, ListItem } from 'react-native-elements';
 
 import { deckOperations } from '../state/deck';
-import DeckRowItem from '../components/DeckRowItem';
 
 class DecksScreen extends Component {
+  static navigationOptions = {
+    title: 'Decks',
+  };
+
   componentDidMount() {
     this.props.loadDecks();
   }
@@ -17,52 +19,25 @@ class DecksScreen extends Component {
     this.props.navigation.navigate('Deck');
   };
 
-  renderEmptyDecks = () => (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => this.props.navigation.navigate('AddDeck')}>
-        <Text style={styles.text}>
-          <FontAwesome name="plus-square" size={25} /> No Decks
-        </Text>
-      </TouchableOpacity>
-    </View>
-  );
-
-  renderDecks = () => {
-    const flatListData = Object.keys(this.props.decks).reduce((data, key) => {
-      data.push({ ...this.props.decks[key] });
-      return data;
-    }, []);
-
-    return (
-      <View style={styles.container}>
-        <FlatList
-          style={styles.list}
-          data={flatListData}
-          keyExtractor={item => item.name}
-          renderItem={data => (
-            <DeckRowItem
-              deck={data.item}
-              handleViewDeckPress={() => this.handleViewDeckPress(data.item.name)}
-            />
-          )}
-          ItemSeparatorComponent={() => (
-            <View
-              style={{
-                height: 2,
-                backgroundColor: '#CED0CE',
-              }}
-            />
-          )}
-        />
-      </View>
-    );
-  };
-
   render() {
-    if (Object.keys(this.props.decks).length === 0) {
-      return this.renderEmptyDecks();
-    }
-    return this.renderDecks();
+    return (
+      <List containerStyle={{ marginTop: 0 }}>
+        <ListItem
+          key="new_deck"
+          title="New Deck"
+          rightIcon={{ name: 'plus-square', type: 'font-awesome' }}
+          onPress={() => this.props.navigation.navigate('AddDeck')}
+        />
+        {Object.values(this.props.decks).map(deck => (
+          <ListItem
+            key={deck.name}
+            title={deck.name}
+            subtitle={`${deck.cards.length} Cards`}
+            onPress={() => this.handleViewDeckPress(deck.name)}
+          />
+        ))}
+      </List>
+    );
   }
 }
 
@@ -82,22 +57,6 @@ DecksScreen.propTypes = {
     ),
   }).isRequired,
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-  list: {
-    height: '100%',
-    width: '100%',
-  },
-  text: {
-    fontSize: 25,
-  },
-});
 
 const mapStateToProps = state => ({
   decks: state.deck.entries,
