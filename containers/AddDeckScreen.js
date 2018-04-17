@@ -1,36 +1,36 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Button, Card, FormInput, FormValidationMessage } from 'react-native-elements';
+import { isEmpty } from 'lodash';
 
 import { deckOperations } from '../state/deck';
 
 class AddDeckScreen extends Component {
   state = {
     name: '',
+    error: false,
   };
 
-  pressCreate = () => {
-    this.props.createDeck(this.state.name);
-    this.setState({ name: '' });
-    this.props.navigation.navigate('Deck');
+  handleCreatePress = () => {
+    if (isEmpty(this.state.name)) {
+      this.setState({ error: true });
+    } else {
+      this.props.createDeck(this.state.name);
+      this.setState({ name: '', error: false });
+      this.props.navigation.navigate('Deck');
+    }
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}> Add Deck</Text>
-        <TextInput
-          style={styles.textInput}
-          editable
-          maxLength={40}
-          placeholder="Name"
-          value={this.state.name}
-          onChangeText={name => this.setState({ name })}
-        />
-        <TouchableOpacity style={styles.button} onPress={this.pressCreate}>
-          <Text style={styles.buttonText}>Create</Text>
-        </TouchableOpacity>
+        <Card title="Enter new deck's title">
+          <FormInput onChangeText={name => this.setState({ name })} value={this.state.name} />
+          <FormValidationMessage>{this.state.error && '* Required field'}</FormValidationMessage>
+          <Button title="Create Deck" raised onPress={this.handleCreatePress} />
+        </Card>
       </View>
     );
   }
@@ -45,31 +45,7 @@ AddDeckScreen.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
     marginTop: 20,
-  },
-  textInput: {
-    margin: 30,
-    alignSelf: 'stretch',
-    padding: 10,
-    borderRadius: 5,
-    borderWidth: 1,
-  },
-  text: {
-    textAlign: 'center',
-    fontSize: 40,
-  },
-  button: {
-    backgroundColor: 'black',
-    padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: 'white',
   },
 });
 
