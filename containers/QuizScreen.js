@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { StyleSheet, Text } from 'react-native';
 import { Button, Card } from 'react-native-elements';
+import { clearLocalNotification } from '../utils/notifications';
 
 import { deckSelectors } from '../state/deck';
 
@@ -94,6 +95,8 @@ class QuizScreen extends Component {
     if (currentCard < cards.length) {
       return this.renderQuiz();
     }
+
+    clearLocalNotification();
     return this.renderResults();
   }
 }

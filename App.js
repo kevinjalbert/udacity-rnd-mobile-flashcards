@@ -10,6 +10,7 @@ import AddCardScreen from './containers/AddCardScreen';
 import AddDeckScreen from './containers/AddDeckScreen';
 import DecksScreen from './containers/DecksScreen';
 import DeckScreen from './containers/DeckScreen';
+import { setLocalNotification } from './utils/notifications';
 
 /* eslint-disable no-console */
 console.disableYellowBox = true; // Disable the react 16.3.0 depreciation warnings in app
@@ -61,6 +62,10 @@ const Navigation = StackNavigator({
 const { width, height } = Dimensions.get('window');
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={store}>

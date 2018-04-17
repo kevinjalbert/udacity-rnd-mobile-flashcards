@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native';
+import { NOTIFICATION_KEY } from './notifications';
 
 export function getDecks() {
   return AsyncStorage.getAllKeys().then(keys =>
@@ -6,6 +7,10 @@ export function getDecks() {
       const decks = {};
 
       results.forEach(values => {
+        // Filter out the notification and null keys
+        if (values[0] === NOTIFICATION_KEY || values[0] === null) {
+          return;
+        }
         decks[values[0]] = JSON.parse(values[1]);
       });
 
