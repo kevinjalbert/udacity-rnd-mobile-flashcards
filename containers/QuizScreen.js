@@ -88,11 +88,26 @@ class QuizScreen extends Component {
     );
   };
 
+  renderEmpty = () => (
+    <Card containerStyle={styles.container}>
+      <Text style={styles.text}>You have no cards... Go add some and come back</Text>
+
+      <Button
+        title="Back to Deck"
+        raised
+        backgroundColor="black"
+        onPress={this.handleBackToDeckPress}
+      />
+    </Card>
+  );
+
   render() {
     const { currentCard } = this.state;
     const { cards } = this.props;
 
-    if (currentCard < cards.length) {
+    if (cards.length === 0) {
+      return this.renderEmpty();
+    } else if (currentCard < cards.length) {
       return this.renderQuiz();
     }
 
