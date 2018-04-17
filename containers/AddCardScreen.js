@@ -5,28 +5,37 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-nativ
 
 import { deckOperations } from '../state/deck';
 
-class AddDeckScreenContainer extends Component {
+class AddCardScreen extends Component {
   state = {
-    name: '',
+    question: '',
+    answer: '',
   };
 
   pressCreate = () => {
-    this.props.createNewDeck(this.state.name);
-    this.setState({ name: '' });
-    this.props.navigation.navigate('Deck');
+    this.props.createNewCard(this.props.deck.name, {
+      question: this.state.question,
+      answer: this.state.answer,
+    });
+    this.setState({ question: '', answer: '' });
+    this.props.navigation.goBack();
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}> Add Deck</Text>
         <TextInput
           style={styles.textInput}
           editable
-          maxLength={40}
-          placeholder="Name"
-          value={this.state.name}
-          onChangeText={name => this.setState({ name })}
+          placeholder="Question"
+          value={this.state.question}
+          onChangeText={question => this.setState({ question })}
+        />
+        <TextInput
+          style={styles.textInput}
+          editable
+          placeholder="Answer"
+          value={this.state.answer}
+          onChangeText={answer => this.setState({ answer })}
         />
         <TouchableOpacity style={styles.button} onPress={this.pressCreate}>
           <Text style={styles.buttonText}>Create</Text>
@@ -36,11 +45,20 @@ class AddDeckScreenContainer extends Component {
   }
 }
 
-AddDeckScreenContainer.propTypes = {
+AddCardScreen.propTypes = {
   navigation: PropTypes.shape({
-    navigate: PropTypes.func,
+    goBack: PropTypes.func,
   }).isRequired,
-  createNewDeck: PropTypes.func.isRequired,
+  createNewCard: PropTypes.func.isRequired,
+  deck: PropTypes.shape({
+    name: PropTypes.string,
+    cards: PropTypes.arrayOf(
+      PropTypes.shape({
+        question: PropTypes.string,
+        answer: PropTypes.string,
+      }),
+    ),
+  }).isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -73,10 +91,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = _state => ({});
+const mapStateToProps = state => ({
+  deck: state.deck.entries[state.deck.selected],
+});
 
 const mapDispatchToProps = {
-  createNewDeck: deckOperations.createNewDeck,
+  createNewCard: deckOperations.createNewCard,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddDeckScreenContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AddCardScreen);

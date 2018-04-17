@@ -5,10 +5,10 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Provider } from 'react-redux';
 
 import store from './state/store';
-import AddCardScreenContainer from './containers/AddCardScreenContainer';
-import AddDeckScreenContainer from './containers/AddDeckScreenContainer';
-import DecksScreenContainer from './containers/DecksScreenContainer';
-import DeckScreenContainer from './containers/DeckScreenContainer';
+import AddCardScreen from './containers/AddCardScreen';
+import AddDeckScreen from './containers/AddDeckScreen';
+import DecksScreen from './containers/DecksScreen';
+import DeckScreen from './containers/DeckScreen';
 
 /* eslint-disable no-console */
 console.disableYellowBox = true; // Disable the react 16.3.0 depreciation warnings in app
@@ -17,14 +17,14 @@ console.disableYellowBox = true; // Disable the react 16.3.0 depreciation warnin
 /* eslint-disable react/prop-types */
 const Tabs = TabNavigator({
   Decks: {
-    screen: DecksScreenContainer,
+    screen: DecksScreen,
     navigationOptions: {
       tabBarLabel: 'Decks',
       tabBarIcon: ({ tintColor }) => <FontAwesome name="book" size={30} color={tintColor} />,
     },
   },
   AddDeck: {
-    screen: AddDeckScreenContainer,
+    screen: AddDeckScreen,
     navigationOptions: {
       tabBarLabel: 'Add Deck',
       tabBarIcon: ({ tintColor }) => <FontAwesome name="plus-square" size={30} color={tintColor} />,
@@ -41,13 +41,13 @@ const Navigation = StackNavigator({
     },
   },
   Deck: {
-    screen: DeckScreenContainer,
+    screen: DeckScreen,
     navigationOptions: {
       headerTitle: 'Deck View',
     },
   },
   AddCard: {
-    screen: AddCardScreenContainer,
+    screen: AddCardScreen,
     navigationOptions: {
       headerTitle: 'Add Card',
     },

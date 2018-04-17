@@ -7,7 +7,7 @@ import { StyleSheet, FlatList, Text, View, TouchableOpacity } from 'react-native
 import { deckOperations } from '../state/deck';
 import DeckRowItem from '../components/DeckRowItem';
 
-class DecksScreenContainer extends Component {
+class DecksScreen extends Component {
   componentDidMount() {
     this.props.loadDecks();
   }
@@ -63,7 +63,7 @@ class DecksScreenContainer extends Component {
   }
 }
 
-DecksScreenContainer.propTypes = {
+DecksScreen.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }).isRequired,
@@ -102,4 +102,4 @@ const mapDispatchToProps = {
   selectDeck: deckOperations.selectDeck,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DecksScreenContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(DecksScreen);

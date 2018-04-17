@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-class DeckScreenContainer extends Component {
+class DeckScreen extends Component {
   render() {
     if (this.props.deck === undefined || this.props.deck === null) {
       return null;
@@ -33,7 +33,7 @@ class DeckScreenContainer extends Component {
   }
 }
 
-DeckScreenContainer.propTypes = {
+DeckScreen.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }).isRequired,
@@ -98,4 +98,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeckScreenContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(DeckScreen);
