@@ -18,7 +18,7 @@ class AddCardScreen extends Component {
     if (isEmpty(this.state.question) || isEmpty(this.state.answer)) {
       this.setState({ error: true });
     } else {
-      this.props.createCard(this.props.deck.name, {
+      this.props.createCard(this.props.deckName, {
         question: this.state.question,
         answer: this.state.answer,
       });
@@ -52,15 +52,7 @@ AddCardScreen.propTypes = {
     goBack: PropTypes.func,
   }).isRequired,
   createCard: PropTypes.func.isRequired,
-  deck: PropTypes.shape({
-    name: PropTypes.string,
-    cards: PropTypes.arrayOf(
-      PropTypes.shape({
-        question: PropTypes.string,
-        answer: PropTypes.string,
-      }),
-    ),
-  }).isRequired,
+  deckName: PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -72,7 +64,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  deck: state.deck.entries[state.deck.selectedDeck],
+  deckName: state.deck.entries[state.deck.selectedDeck].name,
 });
 
 const mapDispatchToProps = {

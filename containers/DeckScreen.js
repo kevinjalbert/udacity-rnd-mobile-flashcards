@@ -6,14 +6,14 @@ import { Button, Card } from 'react-native-elements';
 
 class DeckScreen extends Component {
   render() {
-    if (this.props.deck === undefined || this.props.deck === null) {
+    if (this.props.deckName === undefined || this.props.deckName === null) {
       return null;
     }
 
     return (
       <Card containerStyle={styles.container}>
-        <Text style={styles.name}>{this.props.deck.name}</Text>
-        <Text style={styles.cardsCount}>{this.props.deck.cards.length} Cards</Text>
+        <Text style={styles.name}>{this.props.deckName}</Text>
+        <Text style={styles.cardsCount}>{this.props.cardsCount} Cards</Text>
 
         <Button title="Add Card" raised onPress={() => this.props.navigation.navigate('AddCard')} />
         <Button title="Start Quiz" raised backgroundColor="black" onPress={this.addCard} />
@@ -26,15 +26,8 @@ DeckScreen.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }).isRequired,
-  deck: PropTypes.shape({
-    name: PropTypes.string,
-    cards: PropTypes.arrayOf(
-      PropTypes.shape({
-        question: PropTypes.string,
-        answer: PropTypes.string,
-      }),
-    ),
-  }).isRequired,
+  cardsCount: PropTypes.number.isRequired,
+  deckName: PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -57,7 +50,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  deck: state.deck.entries[state.deck.selectedDeck],
+  deckName: state.deck.entries[state.deck.selectedDeck].name,
+  cardsCount: state.deck.entries[state.deck.selectedDeck].cards.length,
 });
 
 const mapDispatchToProps = {};
