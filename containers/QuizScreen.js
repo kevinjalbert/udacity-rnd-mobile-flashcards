@@ -23,13 +23,21 @@ class QuizScreen extends Component {
     this.setState(state => ({ currentCard: state.currentCard + 1 }));
   };
 
-  render() {
+  handleResetPress = () => {
+    this.setState({ currentCard: 0, score: 0, cardFlipped: false });
+  };
+
+  handleBackToDeckPress = () => {
+    this.props.navigation.goBack();
+  };
+
+  renderQuiz = () => {
     const { currentCard, score, cardFlipped } = this.state;
     const { cards } = this.props;
 
     return (
       <Card
-        title={`Question ${currentCard + 1}/8 | Correct ${score}`}
+        title={`Question ${currentCard + 1}/${cards.length} | Correct ${score}`}
         containerStyle={styles.container}
       >
         <Text style={styles.text}>
@@ -40,28 +48,58 @@ class QuizScreen extends Component {
           title={cardFlipped ? 'Show Answer' : 'Show Question'}
           backgroundColor="white"
           color="red"
-          onPress={() => this.handleFlipCardPress()}
+          onPress={this.handleFlipCardPress}
         />
 
-        <Button
-          title="Correct"
-          raised
-          backgroundColor="green"
-          onPress={() => this.handleCorrectPress()}
-        />
+        <Button title="Correct" raised backgroundColor="green" onPress={this.handleCorrectPress} />
 
         <Button
           title="Incorrect"
           raised
           backgroundColor="red"
-          onPress={() => this.handleIncorrectPress()}
+          onPress={this.handleIncorrectPress}
         />
       </Card>
     );
+  };
+
+  renderResults = () => {
+    const { score } = this.state;
+    const { cards } = this.props;
+
+    return (
+      <Card title="Quiz Results" containerStyle={styles.container}>
+        <Text style={styles.text}>
+          {`You got ${(score / cards.length * 100).toFixed(2)}% of that quiz correct!`}
+        </Text>
+
+        <Button title="Restart Quiz" raised onPress={this.handleResetPress} />
+
+        <Button
+          title="Back to Deck"
+          raised
+          backgroundColor="black"
+          onPress={this.handleBackToDeckPress}
+        />
+      </Card>
+    );
+  };
+
+  render() {
+    const { currentCard } = this.state;
+    const { cards } = this.props;
+
+    if (currentCard < cards.length) {
+      return this.renderQuiz();
+    }
+    return this.renderResults();
   }
 }
 
 QuizScreen.propTypes = {
+  navigation: PropTypes.shape({
+    goBack: PropTypes.func,
+  }).isRequired,
   cards: PropTypes.arrayOf(
     PropTypes.shape({
       question: PropTypes.string,
