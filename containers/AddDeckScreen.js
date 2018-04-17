@@ -8,6 +8,10 @@ import { isEmpty } from 'lodash';
 import { deckOperations } from '../state/deck';
 
 class AddDeckScreen extends Component {
+  static navigationOptions = {
+    title: 'Add Deck',
+  };
+
   state = {
     name: '',
     error: false,

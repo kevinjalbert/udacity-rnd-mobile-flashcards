@@ -36,9 +36,6 @@ const Tabs = TabNavigator({
 const Navigation = StackNavigator({
   Root: {
     screen: Tabs,
-    navigationOptions: {
-      header: null,
-    },
   },
   Deck: {
     screen: DeckScreen,
