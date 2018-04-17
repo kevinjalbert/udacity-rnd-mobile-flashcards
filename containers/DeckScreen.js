@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import { StyleSheet, Text } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 
+import { deckSelectors } from '../state/deck';
+
 class DeckScreen extends Component {
   render() {
-    if (this.props.deckName === undefined || this.props.deckName === null) {
+    if (this.props.deckName === null || this.props.cardsCount === null) {
       return null;
     }
 
@@ -55,8 +57,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  deckName: state.deck.entries[state.deck.selectedDeck].name,
-  cardsCount: state.deck.entries[state.deck.selectedDeck].cards.length,
+  deckName: deckSelectors.selectedDeckName(state),
+  cardsCount: deckSelectors.selectedDeckCardsCount(state),
 });
 
 const mapDispatchToProps = {};

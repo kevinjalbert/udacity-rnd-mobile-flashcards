@@ -5,7 +5,7 @@ import { StyleSheet } from 'react-native';
 import { Button, Card, FormInput, FormLabel, FormValidationMessage } from 'react-native-elements';
 import { isEmpty } from 'lodash';
 
-import { deckOperations } from '../state/deck';
+import { deckSelectors, deckOperations } from '../state/deck';
 
 class AddCardScreen extends Component {
   state = {
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  deckName: state.deck.entries[state.deck.selectedDeck].name,
+  deckName: deckSelectors.selectedDeckName(state),
 });
 
 const mapDispatchToProps = {

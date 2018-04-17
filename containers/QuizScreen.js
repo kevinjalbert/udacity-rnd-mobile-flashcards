@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { StyleSheet, Text } from 'react-native';
 import { Button, Card } from 'react-native-elements';
 
+import { deckSelectors } from '../state/deck';
+
 class QuizScreen extends Component {
   state = {
     currentCard: 0,
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  cards: state.deck.entries[state.deck.selectedDeck].cards,
+  cards: deckSelectors.selectedDeckCards(state),
 });
 
 export default connect(mapStateToProps)(QuizScreen);
