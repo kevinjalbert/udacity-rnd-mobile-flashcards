@@ -48,7 +48,7 @@ class QuizScreen extends Component {
         </Text>
 
         <Button
-          title={cardFlipped ? 'Show Answer' : 'Show Question'}
+          title={cardFlipped ? 'Show Question' : 'Show Answer'}
           backgroundColor="white"
           color="red"
           onPress={this.handleFlipCardPress}
