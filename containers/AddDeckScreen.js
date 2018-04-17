@@ -11,7 +11,7 @@ class AddDeckScreen extends Component {
   };
 
   pressCreate = () => {
-    this.props.createNewDeck(this.state.name);
+    this.props.createDeck(this.state.name);
     this.setState({ name: '' });
     this.props.navigation.navigate('Deck');
   };
@@ -40,7 +40,7 @@ AddDeckScreen.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }).isRequired,
-  createNewDeck: PropTypes.func.isRequired,
+  createDeck: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = _state => ({});
 
 const mapDispatchToProps = {
-  createNewDeck: deckOperations.createNewDeck,
+  createDeck: deckOperations.createDeck,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddDeckScreen);

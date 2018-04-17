@@ -12,7 +12,7 @@ class AddCardScreen extends Component {
   };
 
   pressCreate = () => {
-    this.props.createNewCard(this.props.deck.name, {
+    this.props.createCard(this.props.deck.name, {
       question: this.state.question,
       answer: this.state.answer,
     });
@@ -49,7 +49,7 @@ AddCardScreen.propTypes = {
   navigation: PropTypes.shape({
     goBack: PropTypes.func,
   }).isRequired,
-  createNewCard: PropTypes.func.isRequired,
+  createCard: PropTypes.func.isRequired,
   deck: PropTypes.shape({
     name: PropTypes.string,
     cards: PropTypes.arrayOf(
@@ -92,11 +92,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  deck: state.deck.entries[state.deck.selected],
+  deck: state.deck.entries[state.deck.selectedDeck],
 });
 
 const mapDispatchToProps = {
-  createNewCard: deckOperations.createNewCard,
+  createCard: deckOperations.createCard,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCardScreen);

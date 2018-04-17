@@ -3,24 +3,24 @@ import { getDecks, saveDeckTitle, addCardToDeck } from '../../utils/storage';
 
 const loadDecks = () => dispatch => {
   getDecks().then(decks => {
-    dispatch(actions.loaded(decks));
+    dispatch(actions.decksLoaded(decks));
   });
 };
 
-const createNewDeck = name => dispatch => {
+const createDeck = name => dispatch => {
   saveDeckTitle(name).then(() => {
-    dispatch(actions.newDeck(name));
+    dispatch(actions.deckCreated(name));
   });
 };
 
 const selectDeck = name => dispatch => {
-  dispatch(actions.selected(name));
+  dispatch(actions.deckSelected(name));
 };
 
-const createNewCard = (deckName, card) => dispatch => {
+const createCard = (deckName, card) => dispatch => {
   addCardToDeck(deckName, card).then(() => {
-    dispatch(actions.newCard(deckName, card));
+    dispatch(actions.cardCreated(deckName, card));
   });
 };
 
-export { loadDecks, createNewDeck, selectDeck, createNewCard };
+export { loadDecks, createDeck, selectDeck, createCard };

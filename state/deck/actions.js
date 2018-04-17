@@ -1,32 +1,32 @@
 import * as types from './types';
 
-const loaded = decks => ({
-  type: types.LOADED,
+const decksLoaded = decks => ({
+  type: types.DECKS_LOAD,
   payload: {
     decks,
   },
 });
 
-const newDeck = name => ({
-  type: types.NEW_DECK,
+const deckCreated = name => ({
+  type: types.DECK_CREATE,
   payload: {
     name,
   },
 });
 
-const selected = name => ({
-  type: types.SELECTED,
+const deckSelected = name => ({
+  type: types.DECK_SELECT,
   payload: {
     name,
   },
 });
 
-const newCard = (deckName, card) => ({
-  type: types.NEW_CARD,
+const cardCreated = (deckName, card) => ({
+  type: types.CARD_CREATE,
   payload: {
     deckName,
     card,
   },
 });
 
-export { loaded, newDeck, selected, newCard };
+export { decksLoaded, deckCreated, deckSelected, cardCreated };

@@ -9,17 +9,17 @@ import * as types from './types';
         cards: array
           question: string
           answer: string
-    selected: string
+    selectedDeck: string
 }
 */
 
-const loadedReducer = (state = {}, { type, payload }) => {
+const entriesReducer = (state = {}, { type, payload }) => {
   switch (type) {
-    case types.LOADED:
+    case types.DECKS_LOAD:
       return { ...state, ...payload.decks };
-    case types.NEW_DECK:
+    case types.DECK_CREATE:
       return { ...state, [payload.name]: { name: payload.name, cards: [] } };
-    case types.NEW_CARD:
+    case types.CARD_CREATE:
       const newState = { ...state };
       newState[payload.deckName].cards.push(payload.card);
       return newState;
@@ -30,9 +30,9 @@ const loadedReducer = (state = {}, { type, payload }) => {
 
 const selectedReducer = (state = '', { type, payload }) => {
   switch (type) {
-    case types.SELECTED:
+    case types.DECK_SELECT:
       return payload.name;
-    case types.NEW_DECK:
+    case types.DECK_CREATE:
       return payload.name;
     default:
       return state;
@@ -40,8 +40,8 @@ const selectedReducer = (state = '', { type, payload }) => {
 };
 
 const reducer = combineReducers({
-  entries: loadedReducer,
-  selected: selectedReducer,
+  entries: entriesReducer,
+  selectedDeck: selectedReducer,
 });
 
 export default reducer;

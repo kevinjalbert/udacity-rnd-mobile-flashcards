@@ -1,6 +1,6 @@
-const LOADED = 'deck/loaded';
-const NEW_DECK = 'deck/new_deck';
-const SELECTED = 'deck/selected';
-const NEW_CARD = 'deck/new_card';
+const DECKS_LOAD = 'deck/decks_load';
+const DECK_CREATE = 'deck/deck_create';
+const DECK_SELECT = 'deck/deck_select';
+const CARD_CREATE = 'deck/card_create';
 
-export { LOADED, NEW_DECK, SELECTED, NEW_CARD };
+export { DECKS_LOAD, DECK_CREATE, DECK_SELECT, CARD_CREATE };
