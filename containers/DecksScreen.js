@@ -12,7 +12,7 @@ class DecksScreen extends Component {
     this.props.loadDecks();
   }
 
-  pressDeck = name => {
+  handleViewDeckPress = name => {
     this.props.selectDeck(name);
     this.props.navigation.navigate('Deck');
   };
@@ -40,7 +40,10 @@ class DecksScreen extends Component {
           data={flatListData}
           keyExtractor={item => item.name}
           renderItem={data => (
-            <DeckRowItem deck={data.item} viewDeck={() => this.pressDeck(data.item.name)} />
+            <DeckRowItem
+              deck={data.item}
+              handleViewDeckPress={() => this.handleViewDeckPress(data.item.name)}
+            />
           )}
           ItemSeparatorComponent={() => (
             <View
