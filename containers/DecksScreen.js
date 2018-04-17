@@ -19,10 +19,10 @@ class DecksScreen extends Component {
 
   renderEmptyDecks = () => (
     <View style={styles.container}>
-      <Text style={styles.text}>No Decks</Text>
-
       <TouchableOpacity onPress={() => this.props.navigation.navigate('AddDeck')}>
-        <FontAwesome name="plus-square" size={50} />,
+        <Text style={styles.text}>
+          <FontAwesome name="plus-square" size={25} /> No Decks
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -93,6 +93,9 @@ const styles = StyleSheet.create({
   list: {
     height: '100%',
     width: '100%',
+  },
+  text: {
+    fontSize: 25,
   },
 });
 
