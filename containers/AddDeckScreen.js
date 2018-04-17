@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Button, Card, FormInput, FormValidationMessage } from 'react-native-elements';
 import { isEmpty } from 'lodash';
 
@@ -29,13 +29,11 @@ class AddDeckScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Card title="Enter new deck's title">
-          <FormInput onChangeText={name => this.setState({ name })} value={this.state.name} />
-          <FormValidationMessage>{this.state.error && '* Required field'}</FormValidationMessage>
-          <Button title="Create Deck" raised onPress={this.handleCreatePress} />
-        </Card>
-      </View>
+      <Card title="Enter new deck's title" containerStyle={styles.container}>
+        <FormInput onChangeText={name => this.setState({ name })} value={this.state.name} />
+        <FormValidationMessage>{this.state.error && '* Required field'}</FormValidationMessage>
+        <Button title="Create Deck" raised onPress={this.handleCreatePress} />
+      </Card>
     );
   }
 }
@@ -49,7 +47,9 @@ AddDeckScreen.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    width: '100%',
+    height: '100%',
+    margin: 0,
   },
 });
 

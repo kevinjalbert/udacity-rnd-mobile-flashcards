@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
+import { Button, Card } from 'react-native-elements';
 
 class DeckScreen extends Component {
   render() {
@@ -10,25 +11,13 @@ class DeckScreen extends Component {
     }
 
     return (
-      <View style={styles.container}>
-        <View style={styles.deckInfo}>
-          <Text style={styles.name}>{this.props.deck.name}</Text>
-          <Text style={styles.cardsCount}>{this.props.deck.cards.length} Cards</Text>
-        </View>
+      <Card containerStyle={styles.container}>
+        <Text style={styles.name}>{this.props.deck.name}</Text>
+        <Text style={styles.cardsCount}>{this.props.deck.cards.length} Cards</Text>
 
-        <View style={styles.buttons}>
-          <TouchableOpacity
-            style={styles.addCardButton}
-            onPress={() => this.props.navigation.navigate('AddCard')}
-          >
-            <Text style={styles.addCardText}>Add Card</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.startQuizButton} onPress={this.addCard}>
-            <Text style={styles.startQuizText}>Start Quiz</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+        <Button title="Add Card" raised onPress={() => this.props.navigation.navigate('AddCard')} />
+        <Button title="Start Quiz" raised backgroundColor="black" onPress={this.addCard} />
+      </Card>
     );
   }
 }
@@ -50,45 +39,20 @@ DeckScreen.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  deckInfo: {
-    margin: 100,
+    width: '100%',
+    height: '100%',
+    margin: 0,
   },
   name: {
     textAlign: 'center',
     fontSize: 20,
-    margin: 15,
+    paddingBottom: 15,
   },
   cardsCount: {
     textAlign: 'center',
     fontSize: 15,
-    paddingBottom: 15,
+    paddingBottom: 50,
     color: '#A9A9A9',
-  },
-  addCardButton: {
-    backgroundColor: 'white',
-    padding: 20,
-    margin: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-  },
-  addCardText: {
-    color: 'black',
-  },
-  startQuizButton: {
-    backgroundColor: 'black',
-    padding: 20,
-    margin: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-  },
-  startQuizText: {
-    color: 'white',
   },
 });
 
