@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
-import { Button, Card, FormInput, FormValidationMessage } from 'react-native-elements';
+import { Button, Card, FormInput, FormLabel, FormValidationMessage } from 'react-native-elements';
 import { isEmpty } from 'lodash';
 
 import { deckOperations } from '../state/deck';
@@ -30,6 +30,7 @@ class AddDeckScreen extends Component {
   render() {
     return (
       <Card title="Enter new deck's title" containerStyle={styles.container}>
+        <FormLabel>Name</FormLabel>
         <FormInput onChangeText={name => this.setState({ name })} value={this.state.name} />
         <FormValidationMessage>{this.state.error && '* Required field'}</FormValidationMessage>
         <Button title="Create Deck" raised onPress={this.handleCreatePress} />

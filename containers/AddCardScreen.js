@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Button, Card, FormInput, FormLabel, FormValidationMessage } from 'react-native-elements';
+import { isEmpty } from 'lodash';
 
 import { deckOperations } from '../state/deck';
 
@@ -9,38 +11,38 @@ class AddCardScreen extends Component {
   state = {
     question: '',
     answer: '',
+    error: false,
   };
 
-  pressCreate = () => {
-    this.props.createCard(this.props.deck.name, {
-      question: this.state.question,
-      answer: this.state.answer,
-    });
-    this.setState({ question: '', answer: '' });
-    this.props.navigation.goBack();
+  handleCreatePress = () => {
+    if (isEmpty(this.state.question) || isEmpty(this.state.answer)) {
+      this.setState({ error: true });
+    } else {
+      this.props.createCard(this.props.deck.name, {
+        question: this.state.question,
+        answer: this.state.answer,
+      });
+      this.setState({ question: '', answer: '', error: false });
+      this.props.navigation.goBack();
+    }
   };
 
   render() {
     return (
-      <View style={styles.container}>
-        <TextInput
-          style={styles.textInput}
-          editable
-          placeholder="Question"
-          value={this.state.question}
+      <Card title="Enter card's question and answer" containerStyle={styles.container}>
+        <FormLabel>Question</FormLabel>
+        <FormInput
           onChangeText={question => this.setState({ question })}
+          value={this.state.question}
         />
-        <TextInput
-          style={styles.textInput}
-          editable
-          placeholder="Answer"
-          value={this.state.answer}
-          onChangeText={answer => this.setState({ answer })}
-        />
-        <TouchableOpacity style={styles.button} onPress={this.pressCreate}>
-          <Text style={styles.buttonText}>Create</Text>
-        </TouchableOpacity>
-      </View>
+        <FormValidationMessage>{this.state.error && '* Required field'}</FormValidationMessage>
+
+        <FormLabel>Answer</FormLabel>
+        <FormInput onChangeText={answer => this.setState({ answer })} value={this.state.answer} />
+        <FormValidationMessage>{this.state.error && '* Required field'}</FormValidationMessage>
+
+        <Button title="Create Card" raised onPress={this.handleCreatePress} />
+      </Card>
     );
   }
 }
@@ -63,31 +65,9 @@ AddCardScreen.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-  textInput: {
-    margin: 30,
-    alignSelf: 'stretch',
-    padding: 10,
-    borderRadius: 5,
-    borderWidth: 1,
-  },
-  text: {
-    textAlign: 'center',
-    fontSize: 40,
-  },
-  button: {
-    backgroundColor: 'black',
-    padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: 'white',
+    width: '100%',
+    height: '100%',
+    margin: 0,
   },
 });
 
