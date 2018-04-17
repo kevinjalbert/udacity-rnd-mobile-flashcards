@@ -16,7 +16,12 @@ class DeckScreen extends Component {
         <Text style={styles.cardsCount}>{this.props.cardsCount} Cards</Text>
 
         <Button title="Add Card" raised onPress={() => this.props.navigation.navigate('AddCard')} />
-        <Button title="Start Quiz" raised backgroundColor="black" onPress={this.addCard} />
+        <Button
+          title="Start Quiz"
+          raised
+          backgroundColor="black"
+          onPress={() => this.props.navigation.navigate('Quiz')}
+        />
       </Card>
     );
   }
