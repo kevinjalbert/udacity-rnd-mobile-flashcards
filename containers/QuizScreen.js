@@ -134,6 +134,12 @@ const styles = StyleSheet.create({
     height: '100%',
     margin: 0,
   },
+  text: {
+    fontSize: 20,
+    textAlign: 'center',
+    paddingTop: 10,
+    paddingBottom: 20,
+  }
 });
 
 const mapStateToProps = state => ({
