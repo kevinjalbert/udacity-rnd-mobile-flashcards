@@ -8,7 +8,7 @@ export function getDecks() {
 
       results.forEach(values => {
         // Filter out the notification and null keys
-        if (values[0] === NOTIFICATION_KEY || values[0] === null) {
+        if (values[0] === NOTIFICATION_KEY || values[0] === null || values[0] === undefined) {
           return;
         }
         decks[values[0]] = JSON.parse(values[1]);

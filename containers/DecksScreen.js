@@ -21,6 +21,20 @@ class DecksScreen extends Component {
     this.props.navigation.navigate('Deck');
   };
 
+  renderListItem = deck => {
+    if (deck && deck.name && deck.cards) {
+      return (
+        <ListItem
+          key={deck.name}
+          title={deck.name}
+          subtitle={`${deck.cards.length} Cards`}
+          onPress={() => this.handleViewDeckPress(deck.name)}
+        />
+      );
+    }
+    return null;
+  };
+
   render() {
     return (
       <ScrollView>
@@ -31,14 +45,7 @@ class DecksScreen extends Component {
             rightIcon={{ name: 'plus-square', type: 'font-awesome' }}
             onPress={() => this.props.navigation.navigate('AddDeck')}
           />
-          {Object.values(this.props.decks).map(deck => (
-            <ListItem
-              key={deck.name}
-              title={deck.name}
-              subtitle={`${deck.cards.length} Cards`}
-              onPress={() => this.handleViewDeckPress(deck.name)}
-            />
-          ))}
+          {Object.values(this.props.decks).map(deck => this.renderListItem(deck))}
         </List>
       </ScrollView>
     );
